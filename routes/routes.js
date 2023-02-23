@@ -1,5 +1,5 @@
 const express = require('express');
-const Team = require('../models/model');
+const Project = require('../models/model');
 
 const router = express.Router();
 
@@ -7,13 +7,14 @@ module.exports = router;
 
 //CRUD routes
 //Create
-router.post('/teams', async (req, res) => {
-    const data = new Team({
-        name: 'Manchester United',
-        stadium:'Old Trafford',
+router.post('/projects', async (req, res) => {
+    const data = new Project({
+        name: req.body.Project1,
+        Department: req.body.Integratedtechnologyservices,
+        Employee: req.body.Martha,
     });
     try{
-    //db.teams.insertOne
+    //db.projects.insertOne
     const savedData = await data.save();
     res.status(200).json(savedData);
     } catch (error) {
@@ -22,16 +23,37 @@ router.post('/teams', async (req, res) => {
     
 })
 //Read
-router.get('/teams', (req, res) => {
-    res.send('GET');
-})
+router.get('/', async (req, res) => {
+    try {
+        const data = await Employee.find();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
 //Update
-router.patch('/teams/:id', (req, res) => {
-    res.send('UPDATE');
-})
+router.patch('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedData = req.body;
+
+        const data = await Projects.findByIdAndUpdate(id, updatedData, { new: true });
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
 //Delete
-router.delete('/teams/:id', (req, res) => {
-    res.send('DELETE');
-})
+router.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const data = await Projects.findByIdAndDelete(id);
+        res.status(204).json({ message: `The projects named ${data.name} ${data.department} has been deleted` });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
 
 
