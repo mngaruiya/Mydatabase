@@ -1,5 +1,5 @@
 const express = require('express');
-const Project = require('../models/model');
+const customers = require('../models/model');
 
 const router = express.Router();
 
@@ -7,14 +7,16 @@ module.exports = router;
 
 //CRUD routes
 //Create
-router.post('/projects', async (req, res) => {
-    const data = new Project({
-        name: req.body.Project1,
-        Department: req.body.Integratedtechnologyservices,
-        Employee: req.body.Martha,
+router.post('/customers', async (req, res) => {
+    const data = new Customers({
+        first_name: req.body. first_name,
+        second_name: req.body.second_name,
+        gender: req.body.gender,
+        age: req.body.age
+        
     });
     try{
-    //db.projects.insertOne
+    //db.customers.insertOne
     const savedData = await data.save();
     res.status(200).json(savedData);
     } catch (error) {
@@ -25,7 +27,7 @@ router.post('/projects', async (req, res) => {
 //Read
 router.get('/', async (req, res) => {
     try {
-        const data = await Projects.find();
+        const data = await customers.find();
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -49,8 +51,8 @@ router.delete('/:id', async (req, res) => {
     try {
         const id = req.params.id;
 
-        const data = await Projects.findByIdAndDelete(id);
-        res.status(204).json({ message: `The projects named ${data.name} ${data.department} has been deleted` });
+        const data = await customers.findByIdAndDelete(id);
+        res.status(204).json({ message: `The customer named ${data.first_name} ${data.second_name} has been deleted` });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
