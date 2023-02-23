@@ -11,8 +11,8 @@ const projectsSchema = new mongoose.Schema({
         type: String,
     },
     Employee: { 
-        required: false,
-        type: Number, 
+        required: true,
+        type: String, 
     },
 });
 
