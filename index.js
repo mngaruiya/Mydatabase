@@ -1,6 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose');
 require('dotenv').config();
+const router = express.Router();
+
+router.get('/', async (req, res) => {
+    res.sendFile(path.join(__dirname, '../File/index.html'));
+});
+
 
 const routes = require('./routes/routes');
 
@@ -30,3 +36,5 @@ app.listen(port, () => {
   });
 
 
+
+  module.exports = router;
