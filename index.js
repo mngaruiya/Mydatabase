@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
 });
 
 
-const routes = require('./routes/routes');
+const routes = require('./routes/routes.js');
 
 // Variables
 const port = process.env.PORT || 3000;
