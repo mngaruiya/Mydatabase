@@ -8,7 +8,7 @@ module.exports = router;
 //CRUD routes
 //Create
 router.post('/customers', async (req, res) => {
-    const data = new Customers({
+    const data = new customers({
         first_name: req.body. first_name,
         second_name: req.body.second_name,
         gender: req.body.gender,
@@ -40,7 +40,7 @@ router.patch('/:id', async (req, res) => {
         const id = req.params.id;
         const updatedData = req.body;
 
-        const data = await Projects.findByIdAndUpdate(id, updatedData, { new: true });
+        const data = await customers.findByIdAndUpdate(id, updatedData, { new: true });
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });
