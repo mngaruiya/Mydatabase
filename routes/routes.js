@@ -1,8 +1,7 @@
 const express = require('express');
-const Projects = require('../models/model');
+const Projects = require('../models/model.js');
 
 const router = express.Router();
-
 module.exports = router;
 
 //CRUD routes
@@ -50,7 +49,7 @@ router.delete('/:id', async (req, res) => {
         const id = req.params.id;
 
         const data = await Projects.findByIdAndDelete(id);
-        res.status(204).json({ message: `The customer named ${data.first_name} ${data.second_name} has been deleted` });
+        res.status(204).json({ message: `The projects named ${data.name} ${data.department} has been deleted` });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
