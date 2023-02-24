@@ -1,23 +1,24 @@
 const express = require('express')
 const mongoose = require('mongoose');
 require('dotenv').config();
-const router = express.Router();
 
-router.get('/', async (req, res) => {
-    res.sendFile(path.join(__dirname, '../File/index.html'));
-});
+//Import Routes
+const routes = require('./routes/routes');
+const indexRoutes = require('./routes/index');
 
-
-const routes = require('./routes/routes.js');
-
-// Variables
+// Define the port number
 const port = process.env.PORT || 3000;
 const databaseUrl = process.env.DATABASE_URL || '';
 
+mongoose.set("strictQuery", false);
+
 // Connect to the database
 mongoose.connect(databaseUrl);
+
+//initialize a mongoose connection
 const database = mongoose.connection;
 
+//create a listener to the db
 database.on ('error',(error) =>{
     console.error(error);
 });
@@ -27,9 +28,12 @@ database.once ('connected', () =>{
 
 // Create an express app
 const app = express();
-
+//ensure application only accepts data in json format
 app.use(express.json()); 
-app.use('/', routes);
+
+//tells the app to use the defines routes
+app.use('/', indexRoutes);
+app.use('/projects',routes);
 
 
 app.listen(port, () => {
@@ -38,4 +42,4 @@ app.listen(port, () => {
 
 
 
-  module.exports = router;
+  
