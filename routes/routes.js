@@ -7,16 +7,14 @@ module.exports = router;
 
 //CRUD routes
 //Create
-router.post('/customers', async (req, res) => {
-    const data = new customers({
-        first_name: req.body. first_name,
-        second_name: req.body.second_name,
-        gender: req.body.gender,
-        age: req.body.age
-        
+router.post('/', async (req, res) => {
+    const data = new Projects({
+        name: req.body.name,
+        Department: req.body.Department,
+        Employee: req.body.Employee,
     });
     try{
-    //db.customers.insertOne
+    //db.projects.insertOne
     const savedData = await data.save();
     res.status(200).json(savedData);
     } catch (error) {
@@ -27,7 +25,7 @@ router.post('/customers', async (req, res) => {
 //Read
 router.get('/', async (req, res) => {
     try {
-        const data = await customers.find();
+        const data = await Customers.find();
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -40,7 +38,7 @@ router.patch('/:id', async (req, res) => {
         const id = req.params.id;
         const updatedData = req.body;
 
-        const data = await customers.findByIdAndUpdate(id, updatedData, { new: true });
+        const data = await Projects.findByIdAndUpdate(id, updatedData, { new: true });
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -51,7 +49,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const id = req.params.id;
 
-        const data = await customers.findByIdAndDelete(id);
+        const data = await Projects.findByIdAndDelete(id);
         res.status(204).json({ message: `The customer named ${data.first_name} ${data.second_name} has been deleted` });
     } catch (error) {
         res.status(400).json({ message: error.message });
