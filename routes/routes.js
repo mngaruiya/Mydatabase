@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 //Read
 router.get('/', async (req, res) => {
     try {
-        const data = await Customers.find();
+        const data = await Projects.find();
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });
