@@ -1,24 +1,21 @@
 const mongoose = require('mongoose');
 
 // Schema
-const customersSchema = new mongoose.Schema({
-    first_name: { 
+const projectsSchema = new mongoose.Schema({
+    name: { 
         required: true,
         type: String,
     },
-    last_name: {
+    Department: {
         required: true,
         type: String,
     },
-    gender: { 
+    Employee : { 
         required: true,
         type: String, 
     },
-    age: { 
-        required: false,
-        type: Number, 
-    },
+   
 });
 
-module.exports = mongoose.model('customers', customersSchema);
-const projectsModel = mongoose.model('customers', customersSchema);
+module.exports = mongoose.model('Projects', projectsSchema);
+const projectsModel = mongoose.model('Projects', projectsSchema);
