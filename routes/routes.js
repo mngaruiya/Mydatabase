@@ -1,19 +1,20 @@
 const express = require('express');
-const Projects = require('../models/model');
+const patients = require('../models/model');
 
 const router = express.Router();
-module.exports = router;
+
 
 //CRUD routes
 //Create
 router.post('/', async (req, res) => {
-    const data = new Projects({
-        name: req.body.name,
-        Department: req.body.Department,
-        Employee: req.body.Employee,
+    const data = new patients({
+        Name: req.body.Name,
+        Gender: req.body.Gender,
+        Location: req.body.Location,
+        Doctor:req.body.Doctor,
     });
     try{
-    //db.projects.insertOne
+    //db.patients.insertOne
     const savedData = await data.save();
     res.status(200).json(savedData);
     } catch (error) {
@@ -24,7 +25,7 @@ router.post('/', async (req, res) => {
 //Read
 router.get('/', async (req, res) => {
     try {
-        const data = await Projects.find();
+        const data = await patients.find();
         res.status(200).json(data);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -35,7 +36,7 @@ router.get('/', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const updatedData = req.body;
+        const body = req.body;
 
         const data = await Projects.findByIdAndUpdate(id, updatedData, { new: true });
         res.status(200).json(data);
@@ -49,10 +50,10 @@ router.delete('/:id', async (req, res) => {
         const id = req.params.id;
 
         const data = await Projects.findByIdAndDelete(id);
-        res.status(204).json({ message: `The projects named ${data.Department} has been deleted` });
+        res.status(204).json({ message: `The patients named ${data.Department} has been deleted` });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 });
-
+module.exports = router;
 

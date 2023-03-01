@@ -1,21 +1,25 @@
 const mongoose = require('mongoose');
 
 // Schema
-const projectsSchema = new mongoose.Schema({
-    name: { 
+const patientsSchema = new mongoose.Schema({
+    Name: { 
         required: true,
         type: String,
     },
-    Department: {
+    Gender: {
         required: true,
         type: String,
     },
-    Employee : { 
+    Location : { 
         required: true,
         type: String, 
     },
    
+    Doctor : { 
+        required: true,
+        type: String, 
+    },
 });
 
-module.exports = mongoose.model('projects', projectsSchema);
-const projectsModel = mongoose.model('projects', projectsSchema);
+module.exports = mongoose.model('patients', patientsSchema);
+
