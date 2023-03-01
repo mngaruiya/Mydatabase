@@ -10,8 +10,6 @@ const indexRoutes = require('./routes/index');
 const port = process.env.PORT || 3000;
 const databaseUrl = process.env.DATABASE_URL || '';
 
-
-
 // Connect to the database
 mongoose.connect(databaseUrl);
 
@@ -37,7 +35,7 @@ app.use('/projects',routes);
 
 
 app.listen(port, () => {
-    console.log ('Server is running on PORT ${3000}');
+    console.log (`Server is running on PORT ${port}`);
   });
 
 
